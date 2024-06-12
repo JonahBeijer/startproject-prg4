@@ -10,6 +10,7 @@ export class GameOverScene extends Scene {
 
     handleRestart() {
         this.game.resetGame();
+        this.game.goToScene('main'); // Start het spel opnieuw na reset
     }
 
     onInitialize(engine) {
@@ -40,10 +41,16 @@ export class GameOverScene extends Scene {
         });
         this.add(restartLabel);
 
-        engine.input.pointers.primary.on('down', this.handleRestart);
+     
+    }
+
+    onActivate() {
+        // Add the event listener when the scene is activated
+        this.engine.input.pointers.primary.on('down', this.handleRestart);
     }
 
     onDeactivate() {
+        // Remove the event listener when the scene is deactivated
         this.engine.input.pointers.primary.off('down', this.handleRestart);
     }
 }

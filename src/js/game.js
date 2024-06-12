@@ -1,8 +1,9 @@
 import '../css/style.css';
-import { Actor, Engine, Vector, Input, Axis, Label, Color } from 'excalibur';
+import { Engine, Vector, Input, Axis, Label, Color, Scene, Actor } from 'excalibur'; // Voeg Actor toe
 import { Resources, ResourceLoader } from './resources.js';
 import { Player } from './player.js';
 import { GameOverScene } from './gameOverScene';
+import { BeginScene } from './BeginScene.js'; // Importeer de BeginScene
 
 class Game extends Engine {
     constructor() {
@@ -12,53 +13,70 @@ class Game extends Engine {
         this.scoreLabel = null;
         this.backgroundMusic = Resources.Muziek;
         this.gameOverMusic = Resources.GameOverMusic;
-        this.start(ResourceLoader).then(() => this.startGame());
+
+        // Start het game resource loading en initialisatie
+        this.start(ResourceLoader).then(() => this.initializeGame());
+    }
+
+    initializeGame() {
+        // Voeg de begin- en hoofdscène toe
+        this.addScenes();
+
+        // Ga naar de BeginScene
+        this.goToScene('begin');
+    }
+
+    addScenes() {
+        const beginScene = new BeginScene(this);
+        this.add('begin', beginScene);
+
+        const mainScene = new Scene();
+        mainScene.onInitialize = this.setupMainScene.bind(this); // Stel de main game scène in
+        this.add('main', mainScene);
+    }
+
+    setupMainScene(engine) {
+        console.log("Start de game!");
+
+        // Laad de tilemap en voeg achtergrond toe
+        Resources.Tilemap.load().then(() => {
+            this.createBackground();
+
+            this.tilemap = Resources.Tilemap;
+            Resources.Tilemap.addToScene(this.currentScene);
+
+            this.player = new Player(this.tilemap, this);
+            this.add(this.player);
+
+            engine.input.keyboard.on('press', (evt) => {
+                if (evt.key === Input.Keys.Space && this.player.canJump) {
+                    this.player.jump();
+                }
+            });
+
+            this.currentScene.camera.strategy.lockToActorAxis(this.player, Axis.X);
+            this.currentScene.camera.pos.x = this.player.pos.x;
+
+            this.backgroundMusic.loop = true;
+            this.backgroundMusic.play();
+
+            this.scoreLabel = new Label({
+                pos: new Vector(this.currentScene.camera.pos.x - this.halfDrawWidth + 100, 50),
+                text: 'Score: 0',
+                fontSize: 40,
+                fontFamily: 'Arial',
+                color: Color.Black
+            });
+
+            this.add(this.scoreLabel);
+            this.updateScoreLabel();
+        });
     }
 
     stopScore() {
         if (this.player && !this.player.isMovingRight) {
             return;
         }
-    }
-
-    async startGame() {
-        console.log("Start de game!");
-    
-        await Resources.Tilemap.load();
-    
-        this.createBackground();
-    
-        this.tilemap = Resources.Tilemap; // Initialiseren van de tilemap-instantie
-    
-        Resources.Tilemap.addToScene(this.currentScene);
-    
-        this.player = new Player(this.tilemap, this); // Doorgeven van de tilemap-instantie aan de spelerklasse
-        this.add(this.player);
-    
-        this.input.keyboard.on('press', (evt) => {
-            if (evt.key === Input.Keys.Space && this.player.canJump) {
-                this.player.jump();
-            }
-        });
-    
-        this.currentScene.camera.strategy.lockToActorAxis(this.player, Axis.X);
-    
-        this.currentScene.camera.pos.x = this.player.pos.x;
-    
-        this.backgroundMusic.loop = true;
-        this.backgroundMusic.play();
-    
-        this.scoreLabel = new Label({
-            pos: new Vector(this.currentScene.camera.pos.x - this.halfDrawWidth + 100, 50),
-            text: 'Score: 0',
-             // Vergroot de lettergrootte naar 40
-            fontFamily: 'Arial', // Stel het lettertype in, indien nodig
-           // Stel de uitlijning van de tekst in, indien nodig
-            color: Color.Black
-        });
-    
-        this.add(this.scoreLabel);
-        this.updateScoreLabel();
     }
 
     createBackground() {
@@ -99,7 +117,9 @@ class Game extends Engine {
     }
 
     updateScoreLabel() {
-        this.scoreLabel.text = 'Score: ' + this.score;
+        if (this.scoreLabel) {
+            this.scoreLabel.text = 'Score: ' + this.score;
+        }
     }
 
     onPostUpdate(engine, delta) {
@@ -134,67 +154,71 @@ class Game extends Engine {
         });
     }
 
-
     resetScore() {
         this.score = 0;
         this.updateScoreLabel();
     }
 
     resetGame() {
+        // Huidige scène leegmaken
         this.currentScene.clear();
-        this.resetScore();
-        this.createBackground();
-        this.startGame();
     
-        // Reset de speler
+        // Score resetten
+        this.resetScore();
+    
+        // Achtergrond opnieuw maken
+        this.createBackground();
+    
+        // Spel opnieuw starten door hoofdscène opnieuw in te stellen
+        this.addScenes();
+        this.goToScene('begin');
+    
+        // De speler opnieuw instellen
         if (this.player) {
             this.player.reset();
         }
     }
+    
 
-   showGameOverScene() {
-    if (!this.scenes['gameOver']) {
-        // Pauzeer en reset de achtergrondmuziek
-        if (this.backgroundMusic) {
-            this.backgroundMusic.pause();
-            this.backgroundMusic.currentTime = 0;
+    showGameOverScene() {
+        if (!this.scenes['gameOver']) {
+            if (this.backgroundMusic) {
+                this.backgroundMusic.pause();
+                this.backgroundMusic.currentTime = 0;
+            }
+
+            this.gameOverMusic = new Audio('images/gameovermuziek.mp3');
+            this.gameOverMusic.loop = false;
+            this.gameOverMusic.play();
+
+            const gameOverScene = new GameOverScene(this.score, this);
+            this.addScene('gameOver', gameOverScene);
         }
 
-        // Speel het gameover muziekeffect af
-        this.gameOverMusic = new Audio('images/gameovermuziek.mp3');
-        this.gameOverMusic.loop = false;
-        this.gameOverMusic.play();
-
-        // Stop de achtergrondmuziek wanneer het spel eindigt
-        if (this.backgroundMusic) {
-            this.backgroundMusic.pause();
-            this.backgroundMusic.currentTime = 0;
-        }
-
-        const gameOverScene = new GameOverScene(this.score, this);
-        this.addScene('gameOver', gameOverScene);
+        this.goToScene('gameOver');
     }
 
-    this.goToScene('gameOver');
-}
-
-
-    addScene(name, scene) {
-        if (this.scenes[name]) {
-            this.removeScene(name); // Verwijder de bestaande scène indien aanwezig
+    addScenes() {
+        // Voeg de begin- en hoofdscène alleen toe als ze nog niet bestaan
+        if (!this.scenes['begin']) {
+            const beginScene = new BeginScene(this);
+            this.add('begin', beginScene);
         }
-        this.scenes[name] = scene;
-        this.add(scene);
+    
+        if (!this.scenes['main']) {
+            const mainScene = new Scene();
+            mainScene.onInitialize = this.setupMainScene.bind(this);
+            this.add('main', mainScene);
+        }
     }
 
     removeScene(name) {
-        const scene = this.scenes[name];
-        if (scene) {
-            this.remove(scene);
+        if (this.scenes[name]) {
+            this.remove(this.scenes[name]);
             delete this.scenes[name];
         }
     }
+
 }
 
 const gameInstance = new Game();
-

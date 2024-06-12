@@ -13,8 +13,7 @@ export class Player extends Actor {
         this.game = game;
         this.isMovingRight = false;
         this.previousX = this.pos.x;
-        this.isDead = false; // Toegevoegd voor initialisatie
-        
+        this.isDead = false; 
         const playerSpriteSheet = SpriteSheet.fromImageSource({
             image: Resources.PixelYe,
             grid: { rows: 1, columns: 6, spriteWidth: 32, spriteHeight: 32 }
@@ -141,12 +140,13 @@ export class Player extends Actor {
     reset() {
         // Reset de positie van de speler
         this.pos.setTo(1000, 100);
-
-        // Reset alle variabelen en statussen van de speler
+    
+        // Reset de status van de speler
         this.isDead = false;
         this.graphics.use(this.walkAnimation);
-
+    
         // Roep resetPlayer aan om eventuele aanvullende acties uit te voeren bij het resetten van de speler
         this.resetPlayer();
     }
+    
 }
