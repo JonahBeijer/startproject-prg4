@@ -6,6 +6,7 @@ import { GameOverScene } from './gameOverScene';
 import { BeginScene } from './BeginScene.js'; // Importeer de BeginScene
 
 class Game extends Engine {
+    
     constructor() {
         super({ width: 1920, height: 1080 });
         this.backgrounds = [];
