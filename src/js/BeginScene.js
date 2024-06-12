@@ -36,26 +36,26 @@ export class BeginScene extends Scene {
             this.game.goToScene('main');
         });
 
-        // Maak een nieuwe Loader
-        const loader = new Loader();
+        // // Maak een nieuwe Loader
+        // const loader = new Loader();
 
-        // Voeg de bron toe aan de loader
-        // Voeg de bron toe aan de loader
-    loader.addResource(Resources.PixelYe); 
+        // // Voeg de bron toe aan de loader
+        // // Voeg de bron toe aan de loader
+        // loader.addResource(Resources.PixelYe); 
 
-    // Laad de bronnen
-    loader.load().then(() => {
-        // Maak een sprite van de geladen bron
-        const playerSprite = new Sprite(Resources.PixelYe);
+        // // Laad de bronnen
+        // loader.load().then(() => {
+        //     // Maak een sprite van de geladen bron
+        //     const playerSprite = new Sprite(Resources.PixelYe);
 
-        // Plaats de sprite in het midden van het scherm
-        playerSprite.pos = new Vector(engine.drawWidth / 2, engine.drawHeight / 2);
+        //     // Plaats de sprite in het midden van het scherm
+        //     playerSprite.pos = new Vector(engine.drawWidth / 2, engine.drawHeight / 2);
 
-        // Voeg de sprite toe aan de scene
-        this.add(playerSprite);
-    }).catch((error) => {
-        console.error('Error loading resources:', error);
-    });
+        //     // Voeg de sprite toe aan de scene
+        //     this.add(playerSprite);
+        // }).catch((error) => {
+        //     console.error('Error loading resources:', error);
+        // });
 
         
 
