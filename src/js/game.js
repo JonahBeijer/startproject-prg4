@@ -4,9 +4,8 @@ import { Resources, ResourceLoader } from './resources.js';
 import { Player } from './player.js';
 import { GameOverScene } from './gameOverScene';
 import { BeginScene } from './BeginScene.js'; // Importeer de BeginScene
-
 class Game extends Engine {
-    
+
     constructor() {
         super({ 
             width: 1920,
@@ -19,50 +18,38 @@ class Game extends Engine {
         this.scoreLabel = null;
         this.backgroundMusic = Resources.Muziek;
         this.gameOverMusic = Resources.GameOverMusic;
-
         // Start het game resource loading en initialisatie
         this.start(ResourceLoader).then(() => this.initializeGame());
     }
-
     initializeGame() {
         // Voeg de begin- en hoofdscène toe
         this.addScenes();
-
         // Ga naar de BeginScene
         this.goToScene('begin');
     }
-
     addScenes() {
         const beginScene = new BeginScene(this);
         this.add('begin', beginScene);
-
         const mainScene = new Scene();
         mainScene.onInitialize = this.setupMainScene.bind(this); // Stel de main game scène in
         this.add('main', mainScene);
     }
-
     setupMainScene(engine) {
         console.log("Start de game!");
-
         // Laad de tilemap en voeg achtergrond toe
         Resources.Tilemap.load().then(() => {
             this.createBackground();
-
             this.tilemap = Resources.Tilemap;
             Resources.Tilemap.addToScene(this.currentScene);
-
             this.player = new Player(this.tilemap, this);
             this.add(this.player);
-
             engine.input.keyboard.on('press', (evt) => {
                 if (evt.key === Input.Keys.Space && this.player.canJump) {
                     this.player.jump();
                 }
             });
-
             this.currentScene.camera.strategy.lockToActorAxis(this.player, Axis.X);
             this.currentScene.camera.pos.x = this.player.pos.x;
-
             this.backgroundMusic.loop = true;
             this.backgroundMusic.play();
 
@@ -83,17 +70,14 @@ class Game extends Engine {
             this.updateScoreLabel();
         });
     }
-
     stopScore() {
         if (this.player && !this.player.isMovingRight) {
             return;
         }
     }
-
     createBackground() {
         this.backgrounds.forEach(bg => this.remove(bg));
         this.backgrounds = [];
-
         const background1 = new Actor({
             pos: new Vector(this.halfDrawWidth, this.halfDrawHeight),
             width: this.drawWidth,
@@ -121,21 +105,17 @@ class Game extends Engine {
         this.add(background1);
         this.add(background2);
         this.add(background3);
-
         this.backgrounds = [background1, background2, background3];
     }
-
     increaseScore() {
         this.score += 1;
         this.updateScoreLabel();
     }
-
     updateScoreLabel() {
         if (this.scoreLabel) {
             this.scoreLabel.text = 'Score: ' + this.score;
         }
     }
-
     onPostUpdate(engine, delta) {
         super.onPostUpdate(engine, delta);
         
@@ -145,7 +125,6 @@ class Game extends Engine {
             }
         }
     }
-
     onPreUpdate(engine, delta) {
         super.onPreUpdate(engine, delta);
         this.updateBackgrounds();
@@ -154,17 +133,14 @@ class Game extends Engine {
 
     updateBackgrounds() {
         if (!this.player) return;
-
         const playerX = this.player.pos.x;
         const halfWidth = this.drawWidth / 2;
-
         this.backgrounds.forEach(bg => {
             if (bg.pos.x < playerX - halfWidth - this.drawWidth) {
                 bg.pos.x += this.drawWidth * this.backgrounds.length;
             }
         });
     }
-
     resetScore() {
         this.score = 0;
         this.updateScoreLabel();
@@ -173,13 +149,13 @@ class Game extends Engine {
     async resetGame() {
         // Huidige scène leegmaken
         // this.currentScene.clear();
-    
+
         // Score resetten
         this.resetScore();
-    
-        
+
+
         // this.createBackground();
-    
+
         // Spel opnieuw starten door hoofdscène opnieuw in te stellen
         // this.addScenes();
 
@@ -188,53 +164,22 @@ class Game extends Engine {
 
         // Achtergrond opnieuw maken
         this.createBackground();
-    
+
         // De speler opnieuw instellen
         if (this.player) {
             this.player.reset();
         }
     }
     
-
     showGameOverScene() {
         if (!this.scenes['gameOver']) {
             if (this.backgroundMusic) {
                 this.backgroundMusic.pause();
                 this.backgroundMusic.currentTime = 0;
             }
-
             this.gameOverMusic = new Audio('images/gameovermuziek.mp3');
             this.gameOverMusic.loop = false;
             this.gameOverMusic.play();
-
             const gameOverScene = new GameOverScene(this.score, this);
             this.addScene('gameOver', gameOverScene);
         }
-
-        this.goToScene('gameOver');
-    }
-
-    addScenes() {
-        // Voeg de begin- en hoofdscène alleen toe als ze nog niet bestaan
-        if (!this.scenes['begin']) {
-            const beginScene = new BeginScene(this);
-            this.add('begin', beginScene);
-        }
-    
-        if (!this.scenes['main']) {
-            const mainScene = new Scene();
-            mainScene.onInitialize = this.setupMainScene.bind(this);
-            this.add('main', mainScene);
-        }
-    }
-
-    removeScene(name) {
-        if (this.scenes[name]) {
-            this.remove(this.scenes[name]);
-            delete this.scenes[name];
-        }
-    }
-
-}
-
-const gameInstance = new Game();
