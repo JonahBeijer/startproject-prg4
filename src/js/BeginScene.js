@@ -1,4 +1,4 @@
-// BeginScene.js
+
 import { Scene, Label, Color, Vector, Loader, Sprite, CoordPlane, TextAlign, Font } from 'excalibur';
 import { Resources } from './resources';
 
