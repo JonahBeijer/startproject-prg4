@@ -1,5 +1,5 @@
 import '../css/style.css';
-import { Engine, Vector, Input, Axis, Label, Color, Scene, Actor } from 'excalibur'; // Voeg Actor toe
+import { Engine, Vector, Input, Axis, Label, Color, Scene, Actor, DisplayMode, CoordPlane, Font } from 'excalibur'; // Voeg Actor toe
 import { Resources, ResourceLoader } from './resources.js';
 import { Player } from './player.js';
 import { GameOverScene } from './gameOverScene';
@@ -8,7 +8,12 @@ import { BeginScene } from './BeginScene.js'; // Importeer de BeginScene
 class Game extends Engine {
     
     constructor() {
-        super({ width: 1920, height: 1080 });
+        super({ 
+            width: 1920,
+            height: 1080,
+            displayMode: DisplayMode.FitScreen,
+            fixedUpdateFps: 60 // more consistent physics simulation, guarantees 60 fps worth of updates
+        });
         this.backgrounds = [];
         this.score = 0;
         this.scoreLabel = null;
@@ -61,13 +66,18 @@ class Game extends Engine {
             this.backgroundMusic.loop = true;
             this.backgroundMusic.play();
 
-            this.scoreLabel = new Label({
-                pos: new Vector(this.currentScene.camera.pos.x - this.halfDrawWidth + 100, 50),
-                text: 'Score: 0',
-                fontSize: 40,
-                fontFamily: 'Arial',
-                color: Color.Black
+            const font = new Font({
+                size: 40,
+                family: 'Arial',
+                color: Color.Black,
             });
+            this.scoreLabel = new Label({
+                pos: new Vector(150, 50),
+                text: 'Score: 0',
+                font,
+                coordPlane: CoordPlane.Screen
+            });
+            this.scoreLabel.name = 'score';
 
             this.add(this.scoreLabel);
             this.updateScoreLabel();
@@ -88,6 +98,7 @@ class Game extends Engine {
             pos: new Vector(this.halfDrawWidth, this.halfDrawHeight),
             width: this.drawWidth,
             height: this.drawHeight,
+            z: -1,
         });
         background1.graphics.use(Resources.Background.toSprite());
 
@@ -95,6 +106,7 @@ class Game extends Engine {
             pos: new Vector(this.halfDrawWidth + this.drawWidth, this.halfDrawHeight),
             width: this.drawWidth,
             height: this.drawHeight,
+            z: -1
         });
         background2.graphics.use(Resources.Background.toSprite());
 
@@ -102,6 +114,7 @@ class Game extends Engine {
             pos: new Vector(this.halfDrawWidth + 2 * this.drawWidth, this.halfDrawHeight),
             width: this.drawWidth,
             height: this.drawHeight,
+            z: -1
         });
         background3.graphics.use(Resources.Background.toSprite());
 
@@ -137,9 +150,6 @@ class Game extends Engine {
         super.onPreUpdate(engine, delta);
         this.updateBackgrounds();
 
-        if (this.scoreLabel) {
-            this.scoreLabel.pos = new Vector(this.currentScene.camera.pos.x - this.halfDrawWidth + 100, 50);
-        }
     }
 
     updateBackgrounds() {
@@ -160,19 +170,24 @@ class Game extends Engine {
         this.updateScoreLabel();
     }
 
-    resetGame() {
+    async resetGame() {
         // Huidige scène leegmaken
-        this.currentScene.clear();
+        // this.currentScene.clear();
     
         // Score resetten
         this.resetScore();
     
-        // Achtergrond opnieuw maken
-        this.createBackground();
+        
+        // this.createBackground();
     
         // Spel opnieuw starten door hoofdscène opnieuw in te stellen
-        this.addScenes();
-        this.goToScene('begin');
+        // this.addScenes();
+
+        // GOTO is async
+        await this.goToScene('begin');
+
+        // Achtergrond opnieuw maken
+        this.createBackground();
     
         // De speler opnieuw instellen
         if (this.player) {

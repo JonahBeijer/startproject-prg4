@@ -140,13 +140,21 @@ export class Player extends Actor {
     reset() {
         // Reset de positie van de speler
         this.pos.setTo(1000, 100);
+
+        this.initialSpeed = 100; // Definieer en stel de initiële snelheid in
+        this.vel.x = this.initialSpeed; // Stel de snelheid in op de initiële snelheid
+        this.acceleration = new Vector(0, 800);
+        
+        // Houd de snelheidstoename bij
+        this.speedIncreaseRate = 0.10; // 1% per seconde
+        this.currentSpeedMultiplier = 1; // Bijhouden van de huidige snelheidsvermenigvuldiger
     
         // Reset de status van de speler
         this.isDead = false;
         this.graphics.use(this.walkAnimation);
     
         // Roep resetPlayer aan om eventuele aanvullende acties uit te voeren bij het resetten van de speler
-        this.resetPlayer();
+        // this.resetPlayer();
     }
     
 }
