@@ -84,7 +84,7 @@ export class BeginScene extends Scene {
         // Maak de startknop actor
         const options = new Actor({
             pos: new Vector(engine.drawWidth / 2 + 20, engine.drawHeight / 2 + 210),
-            anchor: new Vector(0.5, 0.5)
+            anchor: new Vector(0.5, 0.50)
         });
 
         // Gebruik de standaard sprite voor de startknop
