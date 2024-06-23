@@ -1,6 +1,6 @@
-// BeginScene.js
-import { Scene, Label, Color, Vector, Loader, Sprite } from 'excalibur';
+import { Scene, Vector, Actor, Animation, SpriteSheet, Sprite } from 'excalibur';
 import { Resources } from './resources';
+
 
 export class BeginScene extends Scene {
     constructor(game) {
@@ -9,51 +9,110 @@ export class BeginScene extends Scene {
     }
 
     onInitialize(engine) {
-        const title = new Label({
-            text: 'Pinkie',
-            pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 4),
-            color: Color.Pink,
-            textAlign: 'center',
-            fontSize: 60,
-            fontFamily: 'Arial',
-        });
-
-        const startButton = new Label({
-            text: 'Start Game',
-            pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2),
-            color: Color.White,
-            fontSize: 20,
-            fontFamily: 'Arial',
-        });
-
-        startButton.on('pointerup', () => {
-            this.game.goToScene('main');
-        });
-
-        // Maak een nieuwe Loader
-        const loader = new Loader();
-
-        // Voeg de bron toe aan de loader
-        // Voeg de bron toe aan de loader
-    loader.addResource(Resources.PixelYe); 
-
-    // Laad de bronnen
-    loader.load().then(() => {
-        // Maak een sprite van de geladen bron
-        const playerSprite = new Sprite(Resources.PixelYe);
-
-        // Plaats de sprite in het midden van het scherm
-        playerSprite.pos = new Vector(engine.drawWidth / 2, engine.drawHeight / 2);
-
-        // Voeg de sprite toe aan de scene
-        this.add(playerSprite);
-    }).catch((error) => {
-        console.error('Error loading resources:', error);
-    });
-
         
+                // Sprite sheet en animatie voor een geanimeerde startknop (niet gebruikt als startknop hieronder)
+        const playerSpriteSheet = SpriteSheet.fromImageSource({
+            image: Resources.PixelYe,
+            grid: {
+                rows: 1,
+                columns: 6,
+                spriteWidth: 32,
+                spriteHeight: 32
+            }
+        });
 
-        this.add(title);
+        const walkAnimation = Animation.fromSpriteSheet(playerSpriteSheet, range(0, 5), 100);
+        walkAnimation.scale = new Vector(3, 3);
+
+        // Optioneel: Je zou de walkAnimation kunnen gebruiken voor een geanimeerde knop
+        const startButton = new Actor({
+            pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2 -150),
+            anchor: new Vector(0.5, 0.5)
+        });
+        startButton.graphics.use(walkAnimation);
         this.add(startButton);
+
+
+        // Definieer de sprites voor de standaard en hover statussen van de startknop
+        const startknopSprite = new Sprite({
+            image: Resources.GameStart,
+            destSize: { width: 400, height: 100 }
+        });
+
+        const startknopHoverSprite = new Sprite({
+            image: Resources.GameStartSelect,
+            destSize: { width: 400, height: 100 }
+        });
+
+        // Maak de startknop actor
+        const startknop = new Actor({
+            pos: new Vector(engine.drawWidth / 2 + 20, engine.drawHeight / 2 + 30),
+            anchor: new Vector(0.5, 0.5)
+        });
+
+        // Gebruik de standaard sprite voor de startknop
+        startknop.graphics.use(startknopSprite);
+        this.add(startknop);
+
+        // Voeg een event handler toe voor wanneer de muis op de knop wordt losgelaten
+        startknop.on('pointerup', () => {
+            this.game.goToScene('Intro');
+        });
+
+        // Voeg event handlers toe voor hover en leave events
+        startknop.on('pointerenter', () => {
+            // Verander de afbeelding naar de hover afbeelding
+            startknop.graphics.use(startknopHoverSprite);
+        });
+
+        startknop.on('pointerleave', () => {
+            // Verander de afbeelding terug naar de standaard afbeelding
+            startknop.graphics.use(startknopSprite);
+        });
+
+        // Definieer de sprites voor de standaard en hover statussen van de startknop
+        const optionsSprite = new Sprite({
+            image: Resources.Options,
+            destSize: { width: 350, height: 85 }
+        });
+
+        const optionsHoverSprite = new Sprite({
+            image: Resources.OptionsSelect,
+            destSize: { width: 350, height: 85 }
+        });
+
+        // Maak de startknop actor
+        const options = new Actor({
+            pos: new Vector(engine.drawWidth / 2 + 20, engine.drawHeight / 2 + 210),
+            anchor: new Vector(0.5, 0.5)
+        });
+
+        // Gebruik de standaard sprite voor de startknop
+        options.graphics.use(optionsSprite);
+        this.add(options);
+
+        // Voeg een event handler toe voor wanneer de muis op de knop wordt losgelaten
+        options.on('pointerup', () => {
+            this.game.goToScene('options');
+        });
+
+        // Voeg event handlers toe voor hover en leave events
+        options.on('pointerenter', () => {
+            // Verander de afbeelding naar de hover afbeelding
+            options.graphics.use(optionsHoverSprite);
+        });
+
+        options.on('pointerleave', () => {
+            // Verander de afbeelding terug naar de standaard afbeelding
+            options.graphics.use(optionsSprite);
+        });
+
+
+
     }
+}
+
+// Helper functie om een range van nummers te genereren
+function range(start, end) {
+    return Array.from({ length: end - start + 1 }, (_, i) => i + start);
 }

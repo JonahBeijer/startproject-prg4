@@ -4,7 +4,7 @@ import { Resources } from './resources';
 export class Player extends Actor {
     constructor(tilemap, game) {
         super({
-            pos: new Vector(1000, 100),
+            pos: new Vector(1270, 384),
             width: 32,
             height: 32,
             collisionType: CollisionType.Active
@@ -49,7 +49,7 @@ export class Player extends Actor {
         this.acceleration = new Vector(0, 800);
         
         // Houd de snelheidstoename bij
-        this.speedIncreaseRate = 0.10; // 1% per seconde
+        this.speedIncreaseRate = 0.05; // 1% per seconde
         this.currentSpeedMultiplier = 1; // Bijhouden van de huidige snelheidsvermenigvuldiger
     }
 
@@ -125,7 +125,7 @@ export class Player extends Actor {
             }
             setTimeout(() => {
                 this.canJump = true;
-            }, 300);
+            }, 600);
         }
     }
     
@@ -139,14 +139,21 @@ export class Player extends Actor {
     
     reset() {
         // Reset de positie van de speler
-        this.pos.setTo(1000, 100);
+        this.pos.setTo(1270, 384);
+
+        this.initialSpeed = 100; // Definieer en stel de initiële snelheid in
+        this.vel.x = this.initialSpeed; // Stel de snelheid in op de initiële snelheid
+        this.acceleration = new Vector(0, 800);
+        
+        // Houd de snelheidstoename bij
+        this.speedIncreaseRate = 0.05; // 1% per seconde
+        this.currentSpeedMultiplier = 1; // Bijhouden van de huidige snelheidsvermenigvuldiger
     
         // Reset de status van de speler
         this.isDead = false;
         this.graphics.use(this.walkAnimation);
     
-        // Roep resetPlayer aan om eventuele aanvullende acties uit te voeren bij het resetten van de speler
-        this.resetPlayer();
+    
     }
     
 }

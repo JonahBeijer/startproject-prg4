@@ -9,8 +9,20 @@ const Resources = {
     Tilemap: new TiledResource('images/test.tmx'),
     Muziek: new Audio('images/muziek.ogg'),
     GameOverMusic: new Audio('images/gameovermuziek.mp3'),
-    Gameover: new ImageSource('images/gameover.png'), 
+    Gameover: new ImageSource('images/gameover.png'),
+    GameStart: new ImageSource('images/startgame2.png'),
+    GameStartSelect: new ImageSource('images/startgameselect2.png'),
+    Options: new ImageSource('images/options2.png'),
+    OptionsSelect: new ImageSource('images/optionsselect2.png'),
+    Home: new ImageSource('images/home2.png'),
+    HomeSelect: new ImageSource('images/homeselect2.png'),
+    Bus: new ImageSource('images/buszwart.png'),
+    Retry: new ImageSource('images/retry.png'),
+    RetrySelect: new ImageSource('images/retryselect.png'),
+    
 };
+    
+
 
 const ResourceLoader = new Loader([
     Resources.PixelYe,
@@ -19,6 +31,16 @@ const ResourceLoader = new Loader([
     Resources.Dude_Monster_Death_8,
     Resources.Tilemap,
     Resources.Gameover,
+    Resources.GameStart,
+    Resources.GameStartSelect,
+    Resources.Options,
+    Resources.OptionsSelect,
+    Resources.Home,
+    Resources.HomeSelect,
+    Resources.Bus,
+    Resources.Retry,
+    Resources.RetrySelect
+    
 ]);
 
 export { Resources, ResourceLoader };

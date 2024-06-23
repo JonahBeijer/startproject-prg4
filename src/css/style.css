@@ -1,21 +1,13 @@
-
-
-body, html {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+canvas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+   
 }
 
-#gameCanvas {
-    display: block;
-    width: 100vw;
-    height: 100vh;
+body{
+    background-color: white;
+
 }
 
-.game-label {
-    font-size: larger; /* Stel de gewenste lettergrootte in */
-    
-}
-body label{
-    font-size: larger;
-}
