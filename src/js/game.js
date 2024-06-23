@@ -101,7 +101,7 @@ class Game extends Engine {
 
             this.currentScene.camera.strategy.lockToActorAxis(this.player, Axis.X);
             this.currentScene.camera.pos.x = this.player.pos.x;
-            this.currentScene.camera.zoom = 1.4;
+            this.currentScene.camera.zoom = 1.2;
 
             this.backgroundMusic.loop = true;
             this.backgroundMusic.play();
