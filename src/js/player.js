@@ -44,7 +44,7 @@ export class Player extends Actor {
         this.canJump = true;
 
         this.tilemap = tilemap;
-        this.initialSpeed = 100; // Definieer en stel de initiële snelheid in
+        this.initialSpeed = 100.0; // Definieer en stel de initiële snelheid in
         this.vel.x = this.initialSpeed; // Stel de snelheid in op de initiële snelheid
         this.acceleration = new Vector(0, 800);
         
