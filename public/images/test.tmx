@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="800" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="800" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="64">
  <tileset firstgid="1" name="tileset_dirt" tilewidth="32" tileheight="32" tilecount="18" columns="6">
   <image source="Tilesets/tileset_dirt.png" width="192" height="96"/>
   <tile id="4">
@@ -40,6 +40,7 @@
    </objectgroup>
   </tile>
  </tileset>
+ <tileset firstgid="44" source="goldCoin1.tsx"/>
  <layer id="1" name="Tilelaag 1" width="800" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -74,6 +75,278 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="4" name="Coins">
+  <object id="9" name="coin" x="1360" y="381.333">
+   <properties>
+    <property name="isCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="19" name="coin" x="1484" y="381.5">
+   <properties>
+    <property name="isCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="21" name="coin" x="1773" y="378">
+   <properties>
+    <property name="isCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="22" name="coin" x="2175.76" y="287.879">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="23" name="coin" x="2039.39" y="351.515">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="24" name="coin" x="2339.39" y="369.697">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="25" name="coin" x="3039.39" y="366.667">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="26" name="coin" x="3575.76" y="357.576">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="27" name="coin" x="4212.12" y="366.667">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="28" name="coin" x="4703.03" y="366.667">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="29" name="coin" x="5578.79" y="345.455">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="30" name="coin" x="6009.09" y="357.576">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="31" name="coin" x="6415.15" y="369.697">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="32" name="coin" x="6906.06" y="369.697">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="33" name="coin" x="7269.7" y="375.758">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="34" name="coin" x="7812.12" y="357.576">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="35" name="coin" x="8163.64" y="351.515">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="36" name="coin" x="8581.82" y="366.667">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="37" name="coin" x="9542.42" y="369.697">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="38" name="coin" x="10021.2" y="284.848">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="39" name="coin" x="10487.9" y="336.364">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="40" name="coin" x="11000" y="357.576">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="41" name="coin" x="11660.6" y="369.697">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="42" name="coin" x="12709.1" y="351.515">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="43" name="coin" x="13790.9" y="378.788">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="44" name="coin" x="15575.8" y="360.606">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="45" name="coin" x="16003" y="430.303">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="46" name="coin" x="16478.8" y="357.576">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="47" name="coin" x="17115.2" y="415.152">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="48" name="coin" x="17527.3" y="369.697">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="49" name="coin" x="18330.3" y="396.97">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="50" name="coin" x="18993.9" y="396.97">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="51" name="coin" x="19563.6" y="403.03">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="52" name="coin" x="20881.8" y="390.909">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="53" name="coin" x="21497" y="336.364">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="54" name="coin" x="23893.9" y="421.212">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="55" name="coin" x="25487" y="442">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="56" name="coin" x="25520" y="444">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="57" name="coin" x="25552" y="443">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="58" name="coin" x="25548" y="407">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="59" name="coin" x="25521" y="407">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="60" name="coin" x="25484" y="409">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="61" name="coin" x="25487" y="380">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="62" name="coin" x="25516" y="377">
+   <properties>
+    <property name="IsCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="63" name="coin" x="25540" y="376">
+   <properties>
+    <property name="isCoin" type="bool" value="true"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
  <layer id="2" name="muren" width="800" height="30">
   <properties>
    <property name="solid" type="bool" value="true"/>

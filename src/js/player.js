@@ -7,13 +7,24 @@ export class Player extends Actor {
             pos: new Vector(1270, 384),
             width: 32,
             height: 32,
-            collisionType: CollisionType.Active
+            collisionType: CollisionType.Active,
+            name: 'Player' // Add name for debugging
         });
 
+        // Add player tag for coin collision detection
+        this.addTag('player');
+        
+        // Debug: verify tag
+        console.log("Player tags:", this.tags);
+        
         this.game = game;
         this.isMovingRight = false;
         this.previousX = this.pos.x;
         this.isDead = false; 
+        
+        // FIXED: Remove explicit collider setup - Excalibur creates it automatically
+        // based on the width and height we provided
+        
         const playerSpriteSheet = SpriteSheet.fromImageSource({
             image: Resources.PixelYe,
             grid: { rows: 1, columns: 6, spriteWidth: 32, spriteHeight: 32 }
@@ -44,13 +55,12 @@ export class Player extends Actor {
         this.canJump = true;
 
         this.tilemap = tilemap;
-        this.initialSpeed = 100.0; // Definieer en stel de initiële snelheid in
-        this.vel.x = this.initialSpeed; // Stel de snelheid in op de initiële snelheid
+        this.initialSpeed = 100.0;
+        this.vel.x = this.initialSpeed;
         this.acceleration = new Vector(0, 800);
         
-        // Houd de snelheidstoename bij
-        this.speedIncreaseRate = 0.05; // 1% per seconde
-        this.currentSpeedMultiplier = 1; // Bijhouden van de huidige snelheidsvermenigvuldiger
+        this.speedIncreaseRate = 0.05;
+        this.currentSpeedMultiplier = 1;
     }
 
     onPreUpdate(engine, delta) {
@@ -92,15 +102,9 @@ export class Player extends Actor {
     onPostUpdate(engine, delta) {
         super.onPostUpdate(engine, delta);
         
-        // Update the speed increase multiplier based on the elapsed time
         this.currentSpeedMultiplier *= Math.pow(1 + this.speedIncreaseRate, delta / 1000);
-
-        // Apply the current speed multiplier to the velocity
         this.vel.x = this.initialSpeed * this.currentSpeedMultiplier;
-
-        // Apply gravity acceleration
         this.vel.addEqual(this.acceleration.scale(delta / 1000));
-
 
         if (this.isMovingRight && this.vel.x > 0 && this.pos.x > this.previousX) {
             this.game.increaseScore();
@@ -131,29 +135,20 @@ export class Player extends Actor {
     
     resetPlayer() {
         if (this.game) {
-            this.isDead = true; // Markeer de speler als dood
-            this.graphics.use(this.deathAnimation); // Gebruik de doodanimatie
+            this.isDead = true;
+            this.graphics.use(this.deathAnimation);
             this.game.showGameOverScene();
         }
     }
     
     reset() {
-        // Reset de positie van de speler
         this.pos.setTo(1270, 384);
-
-        this.initialSpeed = 100; // Definieer en stel de initiële snelheid in
-        this.vel.x = this.initialSpeed; // Stel de snelheid in op de initiële snelheid
+        this.initialSpeed = 100;
+        this.vel.x = this.initialSpeed;
         this.acceleration = new Vector(0, 800);
-        
-        // Houd de snelheidstoename bij
-        this.speedIncreaseRate = 0.05; // 1% per seconde
-        this.currentSpeedMultiplier = 1; // Bijhouden van de huidige snelheidsvermenigvuldiger
-    
-        // Reset de status van de speler
+        this.speedIncreaseRate = 0.05;
+        this.currentSpeedMultiplier = 1;
         this.isDead = false;
         this.graphics.use(this.walkAnimation);
-    
-    
     }
-    
 }

@@ -19,8 +19,7 @@ const Resources = {
     Bus: new ImageSource('images/buszwart.png'),
     Retry: new ImageSource('images/retry.png'),
     RetrySelect: new ImageSource('images/retryselect.png'),
-    Coin: new ImageSource('images/goldCoin1.png'), // voeg het juiste pad toe
-
+    
 };
     
 
@@ -40,8 +39,7 @@ const ResourceLoader = new Loader([
     Resources.HomeSelect,
     Resources.Bus,
     Resources.Retry,
-    Resources.RetrySelect,
-     Resources.Coin
+    Resources.RetrySelect
     
 ]);
 
