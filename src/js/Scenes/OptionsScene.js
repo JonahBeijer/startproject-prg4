@@ -16,7 +16,6 @@ export class OptionsScene extends Scene {
             return Array.from({ length: end - start + 1 }, (_, i) => i + start);
         }
 
-        // Sprite sheet en animatie voor een geanimeerde startknop (niet gebruikt als startknop hieronder)
         const playerSpriteSheet = SpriteSheet.fromImageSource({
             image: Resources.PixelYe,
             grid: {
@@ -30,7 +29,6 @@ export class OptionsScene extends Scene {
         const walkAnimation = Animation.fromSpriteSheet(playerSpriteSheet, range(0, 5), 100);
         walkAnimation.scale = new Vector(3, 3);
 
-        // Optioneel: Je zou de walkAnimation kunnen gebruiken voor een geanimeerde knop
         const startButton = new Actor({
             pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2 - 150),
             anchor: new Vector(0.5, 0.5)
@@ -39,10 +37,8 @@ export class OptionsScene extends Scene {
         startButton.graphics.use(walkAnimation);
         this.add(startButton);
 
-        // Start de animatie (hoewel meestal automatisch)
         walkAnimation.play(); 
 
-        // Load saved volume from localStorage
         const savedVolume = localStorage.getItem('volume');
         if (savedVolume !== null) {
             this.volume = parseFloat(savedVolume);
@@ -50,7 +46,6 @@ export class OptionsScene extends Scene {
             
         }
 
-        // Volume label
         const volumeLabel = new Label({
             text: 'Volume: ' + Math.round(this.volume * 100) + '%',
             pos: new Vector(engine.drawWidth / 2 - 80, engine.drawHeight / 2 + 60),
@@ -63,7 +58,6 @@ export class OptionsScene extends Scene {
         });
         this.add(volumeLabel);
 
-        // Volume bar background (grey bar)
         const volumeBarBackground = new Actor({
             pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2 + 40),
             anchor: new Vector(0.5, 0.5)
@@ -75,7 +69,6 @@ export class OptionsScene extends Scene {
         }));
         this.add(volumeBarBackground);
 
-        // Volume bar fill
         const volumeBarFill = new Actor({
             pos: new Vector(engine.drawWidth / 2 - 150, engine.drawHeight / 2 + 40),
             anchor: new Vector(0.0, 0.5)
@@ -88,7 +81,6 @@ export class OptionsScene extends Scene {
         volumeBarFill.graphics.use(volumeFillRectangle);
         this.add(volumeBarFill);
 
-        // Increase volume button
         const increaseVolumeButton = new Label({
             text: '+',
             pos: new Vector(engine.drawWidth / 2 + 170, engine.drawHeight / 2 + 25),
@@ -108,7 +100,6 @@ export class OptionsScene extends Scene {
         });
         this.add(increaseVolumeButton);
 
-        // Decrease volume button
         const decreaseVolumeButton = new Label({
             text: '-',
             pos: new Vector(engine.drawWidth / 2 - 185, engine.drawHeight / 2 + 25),

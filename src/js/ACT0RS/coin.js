@@ -18,15 +18,11 @@ export class Coin extends Actor {
     }
 
     onCollision(evt) {
-        // Controleer of de botsing met de speler is
         if (evt.other.hasTag('player')) {
             console.log("Munt verzameld!");
             
-            // FIX: Roep de centrale 'increaseScore' methode aan op het game-object.
-            // Deze methode zorgt zelf voor het bijwerken van de data én de UI.
             this.game.increaseScore(1000);
             
-            // Verwijder de munt uit het spel
             this.kill();
         }
     }

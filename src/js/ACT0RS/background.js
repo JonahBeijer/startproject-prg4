@@ -13,7 +13,6 @@ export class Background extends Actor {
 
     onInitialize(engine) {
         const bgSprite = Resources.Background.toSprite();
-        // Sla de breedte op in een klasse-eigenschap zodat we die in reset() kunnen gebruiken
         this.bgWidth = engine.drawWidth; 
         
         for (let i = 0; i < 3; i++) {
@@ -36,10 +35,8 @@ export class Background extends Actor {
         }
     }
 
-    // FIX: VOEG DEZE NIEUWE RESET-METHODE TOE
     reset(engine) {
         console.log("Achtergrond wordt gereset...");
-        // Zet elk achtergrondpaneel terug naar zijn oorspronkelijke startpositie.
         for (let i = 0; i < this.backgroundActors.length; i++) {
             const actor = this.backgroundActors[i];
             actor.pos.x = i * this.bgWidth + this.bgWidth / 2;

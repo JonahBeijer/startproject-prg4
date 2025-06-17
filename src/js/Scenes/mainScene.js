@@ -32,11 +32,7 @@ export class MainScene extends Scene {
         this.camera.strategy.lockToActorAxis(this.player, Axis.X);
         this.camera.zoom = 1.2;
 
-        engine.input.keyboard.on('press', (evt) => {
-            if (evt.key === Input.Keys.Space) {
-                this.player.jump();
-            }
-        });
+      
     }
 
 
@@ -50,7 +46,6 @@ export class MainScene extends Scene {
             this.player.graphics.visible = true; 
         }
 
-        // FIX: ROEP HIER DE NIEUWE RESET-METHODE VAN DE ACHTERGROND AAN
         if (this.background) {
             this.background.reset(context.engine);
         }
@@ -58,7 +53,6 @@ export class MainScene extends Scene {
         this.spawnCoins();
     }
 
-    // ... onDeactivate, onPreUpdate, extractCoinPositions, spawnCoins ...
     onDeactivate(context) {
         super.onDeactivate(context);
         if (this.player) {

@@ -9,12 +9,10 @@ export class GameOverScene extends Scene {
     }
 
     onInitialize(engine) {
-        // --- LAYOUT CONSTANTEN ---
         const centerX = engine.halfDrawWidth;
         const centerY = engine.halfDrawHeight;
         const buttonSpacing = 120;
 
-        // --- GAME OVER ACHTERGROND ---
         const background = new Actor({
             pos: new Vector(centerX, centerY),
             anchor: new Vector(0.5, 1.0) 
@@ -22,12 +20,11 @@ export class GameOverScene extends Scene {
         background.graphics.use(Resources.Gameover.toSprite());
         this.add(background);
         
-        // --- SCORE LABEL ---
         const scoreLabel = new Label({
             text: 'Jouw Score: ' + this.score,
             pos: new Vector(centerX, centerY + 50),
             font: new Font({
-                color: Color.Black, // Zwart voor betere leesbaarheid op de achtergrond
+                color: Color.Black, 
                 size: 48,
                 textAlign: TextAlign.Center,
                 family: 'Arial',
@@ -36,9 +33,7 @@ export class GameOverScene extends Scene {
         });
         this.add(scoreLabel);
 
-        // --- RETRY KNOP (volgens BeginScene stijl) ---
-        
-        // 1. Definieer de sprites voor de retry-knop
+      
         const retrySprite = new Sprite({
             image: Resources.Retry,
             destSize: { width: 350, height: 85 }
@@ -49,19 +44,16 @@ export class GameOverScene extends Scene {
             destSize: { width: 350, height: 85 }
         });
 
-        // 2. Maak de retry-knop actor
         const retryButton = new Actor({
             pos: new Vector(centerX, centerY + buttonSpacing),
             anchor: new Vector(0.4, -0.3)
         });
 
-        // 3. Wijs de standaard sprite toe en voeg toe aan de scene
         retryButton.graphics.use(retrySprite);
         this.add(retryButton);
 
-        // 4. Voeg de event handlers toe
         retryButton.on('pointerup', () => {
-            this.game.resetGame(); // Roep resetGame aan, die naar 'main' gaat
+            this.game.resetGame();
         });
         retryButton.on('pointerenter', () => {
             retryButton.graphics.use(retryHoverSprite);
@@ -71,9 +63,6 @@ export class GameOverScene extends Scene {
         });
 
 
-        // --- HOME KNOP (volgens BeginScene stijl) ---
-
-        // 1. Definieer de sprites voor de home-knop
         const homeSprite = new Sprite({
             image: Resources.Home,
             destSize: { width: 350, height: 85 }
@@ -84,17 +73,14 @@ export class GameOverScene extends Scene {
             destSize: { width: 350, height: 85 }
         });
         
-        // 2. Maak de home-knop actor
         const homeButton = new Actor({
             pos: new Vector(centerX, centerY + buttonSpacing * 2),
             anchor: new Vector(0.4, -0.3)
         });
 
-        // 3. Wijs de standaard sprite toe en voeg toe aan de scene
         homeButton.graphics.use(homeSprite);
         this.add(homeButton);
 
-        // 4. Voeg de event handlers toe
         homeButton.on('pointerup', () => {
             this.game.goToScene('begin');
         });

@@ -4,7 +4,7 @@ export class UI extends Actor {
     constructor() {
         super({
             pos: Vector.Zero,
-            coordPlane: CoordPlane.Screen // Belangrijk voor UI!
+            coordPlane: CoordPlane.Screen 
         });
     }
 
@@ -26,7 +26,7 @@ export class UI extends Actor {
             text: 'Highscore: 0',
             pos: new Vector(engine.drawWidth - 150, 50),
             font,
-            anchor: new Vector(1, 0) // Anker rechtsboven
+            anchor: new Vector(1, 0) 
         });
         this.addChild(this.highScoreLabel);
     }

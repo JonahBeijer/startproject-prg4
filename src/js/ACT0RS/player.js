@@ -1,5 +1,4 @@
-// FIX: Timer is nu toegevoegd aan de import-lijst
-import { Actor, CollisionType, Vector, SpriteSheet, Animation, range, Side, Timer } from 'excalibur';
+import { Actor, CollisionType, Vector, SpriteSheet, Animation, range, Side, Timer, Input } from 'excalibur';
 import { Resources } from '../Recources/resources';
 
 export class Player extends Actor {
@@ -18,10 +17,8 @@ export class Player extends Actor {
         this.tilemap = tilemap;
         this.isDead = false;
         
-        // --- AANGEPAST: Van canJump naar een jump-teller ---
-        this.maxJumps = 2; // Stel in op 2 voor een dubbele sprong
+        this.maxJumps = 2; 
         this.jumpsLeft = this.maxJumps;
-        // ---------------------------------------------------
 
         this.isGrounded = false;
         this.previousX = this.pos.x;
@@ -75,6 +72,11 @@ export class Player extends Actor {
     onPreUpdate(engine, delta) {
         if (this.isDead) return;
 
+        
+        if (engine.input.keyboard.wasPressed(Input.Keys.Space)) {
+            this.jump();
+        }
+
         this.vel.y += this.acceleration.y * (delta / 1000);
 
         if (this.pos.x > this.previousX) {
@@ -87,9 +89,7 @@ export class Player extends Actor {
         }
 
         if (this.isGrounded) {
-            // --- AANGEPAST: Reset de sprongen wanneer de speler landt ---
             this.jumpsLeft = this.maxJumps;
-            // ------------------------------------------------------------
             
             if (this.graphics.current !== this.walkAnimation && !this.isDead) {
                 this.graphics.use(this.walkAnimation);
@@ -105,14 +105,12 @@ export class Player extends Actor {
     }
 
     jump() {
-        // --- AANGEPAST: Controleer of er nog sprongen over zijn ---
         if (this.jumpsLeft > 0 && !this.isDead) {
             this.vel.y = -250;
-            this.jumpsLeft--; // Gebruik een van de sprongen
-            this.isGrounded = false; // De speler is nu in de lucht
+            this.jumpsLeft--; 
+            this.isGrounded = false; 
             this.graphics.use(this.jumpAnimation);
         }
-        // ----------------------------------------------------------
     }
 
     die() {
@@ -142,9 +140,7 @@ export class Player extends Actor {
         this.currentSpeedMultiplier = 1;
         this.isDead = false;
         
-        // --- AANGEPAST: Reset de sprong-teller ---
         this.jumpsLeft = this.maxJumps;
-        // -----------------------------------------
         
         this.isGrounded = false;
         this.graphics.use(this.walkAnimation);

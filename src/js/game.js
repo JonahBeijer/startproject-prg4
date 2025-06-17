@@ -1,10 +1,10 @@
 import { Engine, DisplayMode, Color } from 'excalibur';
 import { Resources, ResourceLoader } from './Recources/resources.js';
 import { BeginScene } from './Scenes/BeginScene.js';
-import { OptionsScene } from './Scenes/OptionsScene.js'; // Aangenomen dat dit bestand bestaat
+import { OptionsScene } from './Scenes/OptionsScene.js'; 
 import { IntroScene } from './Scenes/IntroScene.js';
 import { MainScene } from './Scenes/mainScene.js';
-import { GameOverScene } from './Scenes/gameOverScene.js'; // Aangenomen dat dit bestand bestaat
+import { GameOverScene } from './Scenes/gameOverScene.js';
 
 export class Game extends Engine {
 
@@ -23,9 +23,7 @@ export class Game extends Engine {
         this.gameOverMusic = Resources.GameOverMusic;
     }
 
-    /**
-     * Start de resource loader en initialiseer daarna het spel.
-     */
+   
     start() {
         this.addScenes();
         return super.start(ResourceLoader).then(() => this.initializeGame());
