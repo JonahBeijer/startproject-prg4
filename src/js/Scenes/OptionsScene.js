@@ -1,5 +1,5 @@
 import { Scene, Label, Color, Vector, CoordPlane, Font, Actor, Rectangle, Sprite, SpriteSheet, Animation } from 'excalibur';
-import { Resources } from './resources';
+import { Resources } from '../Recources/resources';
 
 export class OptionsScene extends Scene {
     constructor(game) {

@@ -1,5 +1,5 @@
 import { Scene, Vector, Actor, Animation, SpriteSheet, Sprite } from 'excalibur';
-import { Resources } from './resources';
+import { Resources } from '../Recources/resources';
 
 
 export class BeginScene extends Scene {
