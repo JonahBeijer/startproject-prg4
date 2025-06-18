@@ -1,6 +1,6 @@
 // src/audioManager.js
 
-import { Resources } from './Recources/resources.js';
+import { Resources } from '../Recources/resources.js';
 
 export class AudioManager {
     constructor() {

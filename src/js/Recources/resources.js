@@ -23,6 +23,6 @@ export const Resources = {
 };
 
 export const ResourceLoader = new Loader();
-for (const res in Resources) {
-    ResourceLoader.addResource(Resources[res]);
-}
+Object.values(Resources).forEach(resource => {
+    ResourceLoader.addResource(resource);
+});

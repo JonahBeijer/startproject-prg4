@@ -5,6 +5,7 @@ import { OptionsScene } from './Scenes/OptionsScene.js';
 import { IntroScene } from './Scenes/IntroScene.js';
 import { MainScene } from './Scenes/mainScene.js';
 import { GameOverScene } from './Scenes/gameOverScene.js';
+import { AudioManager } from './Audio/audioManager.js'; 
 
 export class Game extends Engine {
 
@@ -19,11 +20,9 @@ export class Game extends Engine {
 
         this.score = 0;
         this.highScore = this.getHighScore();
-        this.backgroundMusic = Resources.Muziek;
-        this.gameOverMusic = Resources.GameOverMusic;
+        this.audioManager = new AudioManager();
     }
 
-   
     start() {
         this.addScenes();
         return super.start(ResourceLoader).then(() => this.initializeGame());
@@ -32,10 +31,7 @@ export class Game extends Engine {
     initializeGame() {
         this.goToScene('begin');
 
-        if (this.backgroundMusic) {
-            this.backgroundMusic.loop = true;
-            this.backgroundMusic.play();
-        }
+        this.audioManager.playMusic('background');
     }
 
     addScenes() {
@@ -45,7 +41,6 @@ export class Game extends Engine {
         this.add('main', new MainScene(this));
     }
 
-    // --- Score Management ---
     getHighScore() {
         return parseInt(localStorage.getItem('highScore') || '0', 10);
     }
@@ -64,9 +59,6 @@ export class Game extends Engine {
         }
     }
     
-    stopScore() {
-      
-    }
 
     resetScore() {
         this.score = 0;
@@ -78,15 +70,7 @@ export class Game extends Engine {
     showGameOverScene() {
         this.updateHighScore();
 
-        if (this.backgroundMusic) {
-            this.backgroundMusic.pause();
-            this.backgroundMusic.currentTime = 0;
-        }
-
-        if (this.gameOverMusic) {
-            this.gameOverMusic.loop = false;
-            this.gameOverMusic.play();
-        }
+        this.audioManager.playMusic('gameover');
         
         if (this.scenes['gameOver']) {
             this.removeScene('gameOver');
@@ -101,9 +85,6 @@ export class Game extends Engine {
         this.resetScore();
         await this.goToScene('main');
         
-        if (this.backgroundMusic) {
-            this.backgroundMusic.loop = true;
-            this.backgroundMusic.play();
-        }
+        this.audioManager.playMusic('background');
     }
 }
